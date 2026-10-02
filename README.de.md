@@ -160,7 +160,7 @@ Zwei Kandidaten wurden zuerst erwogen und verworfen, weil sie 2025 kaum gehandel
 
 | Abfrage | Dune-Abfrage-ID | Ausgabedatei |
 |---|---|---|
-| `xstocks_solana_30min_prices_by_quote` | 8887243 | `xstocks_solana_30min_by_quote_2025-06-30_2026-09-30.csv` |
+| `xstocks_solana_30min_prices_by_quote` | 8887243 | `xstocks_solana_30min_by_quote_2025-06-30_2026-09-30.csv.gz` |
 | `xstocks_solana_monthly_overview_fees` | 8887198 | `xstocks_solana_monthly_overview_fees.csv` |
 
 Die SQL-Dateien liegen in `sql/`: `xstocks_solana_30min_prices_by_quote.sql` und `xstocks_solana_monthly_overview_fees.sql`.
@@ -169,7 +169,7 @@ Die SQL-Dateien liegen in `sql/`: `xstocks_solana_30min_prices_by_quote.sql` und
 
 | Datei | Zeilen | Inhalt |
 |---|---|---|
-| `xstocks_solana_30min_by_quote_2025-06-30_2026-09-30.csv` | 276.486 | 30-Minuten-Preise und Volumen der fünf Token, getrennt nach Gegenwährung (Stablecoin, SOL, andere) |
+| `xstocks_solana_30min_by_quote_2025-06-30_2026-09-30.csv.gz` | 276.486 | 30-Minuten-Preise und Volumen der fünf Token, getrennt nach Gegenwährung (Stablecoin, SOL, andere). Mit gzip komprimiert, um unter der Upload-Grenze von GitHub zu bleiben; pandas liest die Datei direkt |
 | `xstocks_solana_monthly_overview_fees.csv` | 1.829 | Trades und Volumen je Monat und Handelsort für alle Token mit dem Mint-Präfix von xStocks. Grundlage der Token-Auswahl |
 | `stocks_1h_prepost_2025-07-01_2026-09-30.csv` | 26.204 | Stundenkerzen der fünf Aktien |
 
