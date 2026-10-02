@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit: never commit secrets (config.toml stays in the repository)
+.streamlit/secrets.toml
+
+# Editors and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local environment files
+.env
