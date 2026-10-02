@@ -39,7 +39,7 @@ The project is written for two audiences: people from the stock market who have 
 | `data/clean/` | Cleaned tables written by the notebook |
 | `figures/` | Six charts written by the notebook |
 
-The dashboard runs online at https://tokenized-vs-nasdaq-stocks-after-hours.streamlit.app. To run it locally:
+The dashboard runs online at https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/ To run it locally:
 
 ```bash
 pip install -r requirements.txt
