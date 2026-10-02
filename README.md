@@ -4,7 +4,7 @@
 
 **Tesla, Nvidia, Alphabet, Apple and Amazon · 8 July 2025 to 30 September 2026**
 
-**Interactive dashboard (English and German):** https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/
+**[Open the interactive dashboard](https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/)** (English and German)
 
 Nasdaq trades from 9:30 to 16:00 New York time. Tokenized versions of the same shares trade around the clock on the Solana blockchain. This project compares five tokenized stocks with their underlying shares and asks what happens to the token price while the stock exchange is closed: overnight, over weekends and over public holidays.
 
@@ -39,7 +39,7 @@ The project is written for two audiences: people from the stock market who have 
 | `data/clean/` | Cleaned tables written by the notebook |
 | `figures/` | Six charts written by the notebook |
 
-The dashboard runs online at https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/ To run it locally:
+The dashboard runs online: [open dashboard](https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/). To run it locally:
 
 ```bash
 pip install -r requirements.txt
