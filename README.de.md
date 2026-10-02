@@ -4,7 +4,7 @@
 
 **Tesla, Nvidia, Alphabet, Apple und Amazon · 8. Juli 2025 bis 30. September 2026**
 
-**Interaktives Dashboard (Deutsch und Englisch):** https://tokenized-vs-nasdaq-stocks-after-hours.streamlit.app
+**[Interaktives Dashboard öffnen](https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/)** (Deutsch und Englisch)
 
 Die Nasdaq handelt von 9:30 bis 16:00 Uhr New Yorker Zeit. Tokenisierte Versionen derselben Aktien werden auf der Solana-Blockchain rund um die Uhr gehandelt. Dieses Projekt vergleicht fünf tokenisierte Aktien mit ihren zugrunde liegenden Aktien und fragt, was mit dem Token-Preis passiert, während die Börse geschlossen ist: über Nacht, am Wochenende und an Feiertagen.
 
@@ -41,7 +41,7 @@ Die Beschriftung der Charts ist englisch.
 | `data/clean/` | Bereinigte Tabellen, die das Notebook schreibt |
 | `figures/` | Sechs Charts, die das Notebook schreibt |
 
-Das Dashboard läuft online unter https://tokenized-vs-nasdaq-stocks-after-hours.streamlit.app. Lokal starten:
+Das Dashboard läuft online: [Dashboard öffnen](https://tokenized-vs-nasdaq-stocks-after-hours-bpasxc8wni65acwxnmkscb.streamlit.app/). Lokal starten:
 
 ```bash
 pip install -r requirements.txt
