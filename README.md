@@ -173,7 +173,7 @@ The net move from the last token price before the close to the last price before
 
 **Largely, yes.** Three measures answer this. All three compare the token with the stock over the same closed period. The token's move runs from its last price before the close to its last price within two hours before the open, and the stock's gap runs from the official close to the official open.
 
-The first measure is the correlation between the two. It is 0.88 (Apple) to 0.96 (Nvidia), where 1 would mean a perfect linear relationship and 0 none, and it is weaker over weekends (0.88) than over regular nights (0.95). The second is the direction: where the stock gapped by at least 0.5 %, the token had moved in the same direction in 95 % to 99 % of the cases. The third is the forecast error, the median distance between the last token price before the open and the real opening price. It is 0.18 % to 0.30 %. As a naive benchmark, yesterday's closing price misses the opening price by 0.32 % to 0.85 %.
+The first measure is the correlation between the two. It is 0.88 (Apple) to 0.96 (Nvidia), where 1 would mean a perfect linear relationship and 0 no linear relationship, and it is weaker over weekends (0.88) than over regular nights (0.95). The second is the direction: where the stock gapped by at least 0.5 %, the token had moved in the same direction in 95 % to 99 % of the cases. The third is the forecast error, the median distance between the last token price before the open and the real opening price. It is 0.18 % to 0.30 %. As a naive benchmark, yesterday's closing price misses the opening price by 0.32 % to 0.85 %.
 
 Each dot in the first chart is one closed period. The closer the dots lie to the dashed line, the better the token's move matched the stock's gap.
 
