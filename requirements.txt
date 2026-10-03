@@ -3,5 +3,5 @@ numpy
 matplotlib
 yfinance
 plotly
-streamlit>=1.50
+streamlit>=1.52
 jupyter

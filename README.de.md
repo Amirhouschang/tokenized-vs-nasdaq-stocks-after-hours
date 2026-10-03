@@ -97,7 +97,7 @@ An einer dezentralen Börse (DEX) tauscht ein Händler gegen einen Liquiditätsp
 | Orca (Whirlpool) | 16,3 % | 8,8 % | 3,3 % | 1,7 % | 0,6 % |
 | Andere | 7,2 % | 2,3 % | 2,9 % | 7,3 % | 1,2 % |
 
-Im September 2026 änderte sich das Handelsmuster. Ein neuer Handelsort, Raydium LaunchLab, kam auf 12 % bis 19 % des Volumens der fünf Token, und der Anteil der Trades gegen andere Token als Stablecoins oder SOL (die eigene Währung von Solana) stieg von 4,9 % des Volumens im August auf 38,5 % im September. Die hier verwendeten Stablecoin-Preise waren davon nicht sichtbar betroffen: Im September 2026 weichen die Preise aus den übrigen Trades im Median um 0,04 % bis 0,22 % davon ab, je nach Token und Gegenwährung.
+Im September 2026 änderte sich das Handelsmuster. Ein neuer Handelsort, Raydium LaunchLab, tauchte im August 2026 mit nur rund 158.000 USD Volumen auf (nur beim Nvidia-Token) und kam im September auf 12 % bis 19 % des Volumens jedes der fünf Token. Der Anteil der Trades gegen andere Token als Stablecoins oder SOL (die eigene Währung von Solana) stieg von 4,9 % des Volumens im August auf 38,5 % im September. Die hier verwendeten Stablecoin-Preise waren davon nicht sichtbar betroffen: Im September 2026 weichen die Preise aus den übrigen Trades im Median um 0,04 % bis 0,22 % davon ab, je nach Token und Gegenwährung.
 
 ## Daten und Methode
 
@@ -173,7 +173,7 @@ Die Nettobewegung vom letzten Token-Preis vor dem Schluss bis zum letzten Preis 
 
 **Zum großen Teil ja.** Drei Messgrößen beantworten das. Alle drei vergleichen den Token mit der Aktie über dieselbe Börsenpause. Die Bewegung des Tokens reicht von seinem letzten Preis vor dem Schluss bis zu seinem letzten Preis innerhalb von zwei Stunden vor der Eröffnung, der Sprung der Aktie vom offiziellen Schluss bis zur offiziellen Eröffnung.
 
-Die erste Messgröße ist die Korrelation zwischen beiden. Sie liegt bei 0,88 (Apple) bis 0,96 (Nvidia), wobei 1 identische Bewegungen bedeuten würde, und sie ist über Wochenenden (0,88) schwächer als über normale Nächte (0,95). Die zweite ist die Richtung: Wo die Aktie um mindestens 0,5 % sprang, war der Token in 95 % bis 99 % der Fälle in dieselbe Richtung gelaufen. Die dritte ist der Prognosefehler, der mittlere Abstand (Median) zwischen dem letzten Token-Preis vor der Eröffnung und dem echten Eröffnungskurs. Er liegt bei 0,18 % bis 0,30 %. Als einfache Vergleichsgröße verfehlt der Schlusskurs vom Vortag den Eröffnungskurs um 0,32 % bis 0,85 %.
+Die erste Messgröße ist die Korrelation zwischen beiden. Sie liegt bei 0,88 (Apple) bis 0,96 (Nvidia), wobei 1 einen perfekten linearen Zusammenhang bedeuten würde und 0 gar keinen, und sie ist über Wochenenden (0,88) schwächer als über normale Nächte (0,95). Die zweite ist die Richtung: Wo die Aktie um mindestens 0,5 % sprang, war der Token in 95 % bis 99 % der Fälle in dieselbe Richtung gelaufen. Die dritte ist der Prognosefehler, der mittlere Abstand (Median) zwischen dem letzten Token-Preis vor der Eröffnung und dem echten Eröffnungskurs. Er liegt bei 0,18 % bis 0,30 %. Als einfache Vergleichsgröße verfehlt der Schlusskurs vom Vortag den Eröffnungskurs um 0,32 % bis 0,85 %.
 
 Jeder Punkt im ersten Chart ist eine Börsenpause. Je näher die Punkte an der gestrichelten Linie liegen, desto besser passte die Bewegung des Tokens zum Sprung der Aktie.
 

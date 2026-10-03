@@ -34,7 +34,7 @@ TEXT = {
         "overnight": "Regular night", "weekend": "Weekend", "holiday": "Break with a holiday",
         "no_data": "No closed periods match the filters. Please widen the selection.",
         "k_n": "Closed periods", "k_n_help": "One closed period = from one closing bell to the next opening bell, per stock.",
-        "k_corr": "Correlation", "k_corr_help": "Correlation between the token's move while Nasdaq is closed and the stock's gap from close to open. 1 = identical moves.",
+        "k_corr": "Correlation", "k_corr_help": "Correlation between the token's move while Nasdaq is closed and the stock's gap from close to open. 1 = perfect linear relationship, 0 = none.",
         "k_err": "Token forecast error", "k_err_help": "Median distance between the token price shortly before the open and the real opening price.",
         "k_err_vs": "yesterday's close: {v} %",
         "k_dir": "Same direction", "k_dir_help": "Share of closed periods in which token and stock moved in the same direction. Only periods with a stock gap of at least 0.5 %.",
@@ -61,7 +61,8 @@ TEXT = {
         "t_vol": "Token trading volume while Nasdaq is closed", "t_vol_note": "USD volume against stablecoins during closed periods, per month. The market grew strongly in 2026.",
         "ax_month": "Month", "ax_volume": "Volume (million USD)",
         "p_title": "Distance to the next opening price during a regular night",
-        "p_note": "Regular nights only (17.5 hours). The token price approaches the next opening price mainly in the pre-market hours.",
+        "p_note": "Regular nights only (17.5 hours), for the selected stocks and period. The token price approaches the next opening price mainly in the pre-market hours.",
+        "p_none": "No regular night (17.5 hours) in the current selection. Select the type \"Regular night\" and a period with trading days.",
         "ax_distance": "Median distance to next open (%)",
         "p_vol": "When are the tokens traded during the night?", "ax_vol_share": "Share of night volume (%)",
         "ph_post": "Post-market", "ph_closed": "Stock market fully closed", "ph_pre": "Pre-market",
@@ -101,7 +102,7 @@ TEXT = {
         "overnight": "Normale Nacht", "weekend": "Wochenende", "holiday": "Pause mit Feiertag",
         "no_data": "Keine Börsenpause passt zu den Filtern. Bitte die Auswahl erweitern.",
         "k_n": "Börsenpausen", "k_n_help": "Eine Börsenpause = von einer Schlussglocke bis zur nächsten Eröffnung, je Aktie.",
-        "k_corr": "Korrelation", "k_corr_help": "Korrelation zwischen der Token-Bewegung während der Börsenpause und dem Sprung der Aktie von Schluss zu Eröffnung. 1 = identische Bewegung.",
+        "k_corr": "Korrelation", "k_corr_help": "Korrelation zwischen der Token-Bewegung während der Börsenpause und dem Sprung der Aktie von Schluss zu Eröffnung. 1 = perfekter linearer Zusammenhang, 0 = kein Zusammenhang.",
         "k_err": "Prognosefehler des Tokens", "k_err_help": "Mittlerer Abstand zwischen dem Token-Preis kurz vor der Eröffnung und dem echten Eröffnungskurs (Median).",
         "k_err_vs": "Vortagesschluss: {v} %",
         "k_dir": "Gleiche Richtung", "k_dir_help": "Anteil der Börsenpausen, in denen Token und Aktie in dieselbe Richtung liefen. Nur Pausen mit einem Aktiensprung von mindestens 0,5 %.",
@@ -128,7 +129,8 @@ TEXT = {
         "t_vol": "Token-Handelsvolumen, während die Nasdaq geschlossen ist", "t_vol_note": "USD-Volumen gegen Stablecoins in den Börsenpausen, je Monat. Der Markt ist 2026 stark gewachsen.",
         "ax_month": "Monat", "ax_volume": "Volumen (Mio. USD)",
         "p_title": "Abstand zum nächsten Eröffnungskurs im Verlauf einer normalen Nacht",
-        "p_note": "Nur normale Nächte (17,5 Stunden). Der Token-Preis nähert sich dem nächsten Eröffnungskurs vor allem in der Vorbörse.",
+        "p_note": "Nur normale Nächte (17,5 Stunden), für die gewählten Aktien und den gewählten Zeitraum. Der Token-Preis nähert sich dem nächsten Eröffnungskurs vor allem in der Vorbörse.",
+        "p_none": "Keine normale Nacht (17,5 Stunden) in der aktuellen Auswahl. Wähle die Art „Normale Nacht“ und einen Zeitraum mit Handelstagen.",
         "ax_distance": "Mittlerer Abstand zur Eröffnung (%)",
         "p_vol": "Wann werden die Token in der Nacht gehandelt?", "ax_vol_share": "Anteil am Nachtvolumen (%)",
         "ph_post": "Nachbörse", "ph_closed": "Börse ganz geschlossen", "ph_pre": "Vorbörse",
@@ -179,11 +181,12 @@ def load_data():
 
 
 @st.cache_data
-def night_profile(tickers):
-    """Median distance to the next open and volume share by hours since the close (regular nights)."""
+def night_profile(tickers, first, last):
+    """Median distance to the next open and volume share by hours since the close (regular nights in the period)."""
     nights, tokens, _ = load_data()
     regular = nights[(nights["night_type"] == "overnight") & (nights["hours_closed"] == 17.5)
-                     & nights["ticker"].isin(tickers)]
+                     & nights["ticker"].isin(tickers)
+                     & (nights["prev_trading_day"].dt.date >= first) & (nights["prev_trading_day"].dt.date <= last)]
     path = tokens[tokens["night_type"] == "overnight"].merge(
         regular[["ticker", "prev_trading_day", "close_utc", "stock_open"]], on=["ticker", "prev_trading_day"])
     path["hours"] = (path["time_utc"] - path["close_utc"]).dt.total_seconds() / 3600
@@ -253,13 +256,15 @@ if nights.empty:
     st.stop()
 
 # ----------------------------------------------------------------------------- KPI row
-valid = nights.dropna(subset=["token_move_pct", "stock_gap_pct"])
+valid = nights.dropna(subset=["token_move_pct", "stock_gap_pct"]).copy()
+# Forecast "open = yesterday's close": error relative to the real open, like pre_open_error_pct
+valid["naive_error_pct"] = 100 * (valid["stock_close"] / valid["stock_open"] - 1)
 real_gap = valid[valid["stock_gap_pct"].abs() >= 0.5]
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric(T["k_n"], num(len(nights), 0), help=T["k_n_help"])
 k2.metric(T["k_corr"], num(valid["token_move_pct"].corr(valid["stock_gap_pct"])), help=T["k_corr_help"])
 k3.metric(T["k_err"], f"{num(valid['pre_open_error_pct'].abs().median())} %",
-          delta=T["k_err_vs"].format(v=num(valid["stock_gap_pct"].abs().median())), delta_color="off",
+          delta=T["k_err_vs"].format(v=num(valid["naive_error_pct"].abs().median())), delta_color="off",
           delta_arrow="off", help=T["k_err_help"])
 k4.metric(T["k_dir"], f"{num(100 * (np.sign(real_gap['token_move_pct']) == np.sign(real_gap['stock_gap_pct'])).mean(), 1)} %"
           if len(real_gap) else "–", help=T["k_dir_help"])
@@ -292,7 +297,7 @@ with tabs[0]:
         st.caption(T["ov_scatter_note"])
     with right:
         st.markdown(f"**{T['ov_bar']}**")
-        err = valid.groupby("ticker").agg(naive=("stock_gap_pct", lambda s: s.abs().median()),
+        err = valid.groupby("ticker").agg(naive=("naive_error_pct", lambda s: s.abs().median()),
                                           token=("pre_open_error_pct", lambda s: s.abs().median())).reindex(stocks_shown)
         fig = go.Figure()
         for column, name, color in [("naive", T["s_naive"], ORANGE), ("token", T["s_token"], BLUE)]:
@@ -402,33 +407,41 @@ with tabs[2]:
 
 # ----------------------------------------------------------------------------- tab 4: course of a night
 with tabs[3]:
-    distance, volume = night_profile(tuple(stocks_shown))
-    ticks = [0, 4, 8, 12, 17.5]
-    tick_text = [T["tick_close"], "20:00", "00:00", "04:00", T["tick_open"]]
+    if "overnight" in sel_types:
+        distance, volume = night_profile(tuple(stocks_shown), sel_dates[0], sel_dates[1])
+    else:
+        distance, volume = pd.DataFrame(), pd.Series(dtype=float)
+    if distance.empty:
+        st.info(T["p_none"])
+    else:
+        ticks = [0, 4, 8, 12, 17.5]
+        tick_text = [T["tick_close"], "20:00", "00:00", "04:00", T["tick_open"]]
 
-    st.markdown(f"**{T['p_title']}**")
-    fig = go.Figure()
-    fig.add_vrect(x0=4, x1=12, fillcolor=SHADE, opacity=1, line_width=0, layer="below")
-    for ticker in stocks_shown:
-        fig.add_trace(go.Scatter(x=distance.index, y=distance[ticker], mode="lines", name=ticker,
-                                 line=dict(color=STOCK_COLORS[ticker], width=2),
-                                 hovertemplate=ticker + ": %{y:.2f} %<extra></extra>"))
-    for x_pos, label in [(2, T["ph_post"]), (8, T["ph_closed"]), (14.75, T["ph_pre"])]:
-        fig.add_annotation(x=x_pos, y=1, yref="paper", text=label, showarrow=False, font=dict(color=MUTED, size=12),
-                           yanchor="top")
-    fig.update_xaxes(tickvals=ticks, ticktext=tick_text, range=[-0.4, 18.3], showgrid=False, title_text=T["ax_time_ny"])
-    fig.update_yaxes(title_text=T["ax_distance"], rangemode="tozero")
-    fig.update_layout(hovermode="x unified")
-    st.plotly_chart(style(fig, 420), width="stretch")
-    st.caption(T["p_note"])
+        st.markdown(f"**{T['p_title']}**")
+        fig = go.Figure()
+        fig.add_vrect(x0=4, x1=12, fillcolor=SHADE, opacity=1, line_width=0, layer="below")
+        for ticker in stocks_shown:
+            if ticker not in distance.columns:
+                continue
+            fig.add_trace(go.Scatter(x=distance.index, y=distance[ticker], mode="lines", name=ticker,
+                                     line=dict(color=STOCK_COLORS[ticker], width=2),
+                                     hovertemplate=ticker + ": %{y:.2f} %<extra></extra>"))
+        for x_pos, label in [(2, T["ph_post"]), (8, T["ph_closed"]), (14.75, T["ph_pre"])]:
+            fig.add_annotation(x=x_pos, y=1, yref="paper", text=label, showarrow=False, font=dict(color=MUTED, size=12),
+                               yanchor="top")
+        fig.update_xaxes(tickvals=ticks, ticktext=tick_text, range=[-0.4, 18.3], showgrid=False, title_text=T["ax_time_ny"])
+        fig.update_yaxes(title_text=T["ax_distance"], rangemode="tozero")
+        fig.update_layout(hovermode="x unified")
+        st.plotly_chart(style(fig, 420), width="stretch")
+        st.caption(T["p_note"])
 
-    st.markdown(f"**{T['p_vol']}**")
-    fig = go.Figure(go.Bar(x=volume.index + 0.25, y=volume, marker_color=BLUE, marker_line=dict(color="white", width=2),
-                           hovertemplate="%{y:.1f} %<extra></extra>"))
-    fig.add_vrect(x0=4, x1=12, fillcolor=SHADE, opacity=1, line_width=0, layer="below")
-    fig.update_xaxes(tickvals=ticks, ticktext=tick_text, range=[-0.4, 18.3], showgrid=False, title_text=T["ax_time_ny"])
-    fig.update_yaxes(title_text=T["ax_vol_share"])
-    st.plotly_chart(style(fig, 280, legend=False), width="stretch")
+        st.markdown(f"**{T['p_vol']}**")
+        fig = go.Figure(go.Bar(x=volume.index + 0.25, y=volume, marker_color=BLUE, marker_line=dict(color="white", width=2),
+                               hovertemplate="%{y:.1f} %<extra></extra>"))
+        fig.add_vrect(x0=4, x1=12, fillcolor=SHADE, opacity=1, line_width=0, layer="below")
+        fig.update_xaxes(tickvals=ticks, ticktext=tick_text, range=[-0.4, 18.3], showgrid=False, title_text=T["ax_time_ny"])
+        fig.update_yaxes(title_text=T["ax_vol_share"])
+        st.plotly_chart(style(fig, 280, legend=False), width="stretch")
 
 # ----------------------------------------------------------------------------- tab 5: trading test
 with tabs[4]:

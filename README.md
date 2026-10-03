@@ -97,7 +97,7 @@ On a decentralized exchange (DEX), a trader swaps against a liquidity pool inste
 | Orca (Whirlpool) | 16.3 % | 8.8 % | 3.3 % | 1.7 % | 0.6 % |
 | Other | 7.2 % | 2.3 % | 2.9 % | 7.3 % | 1.2 % |
 
-In September 2026 the trading pattern changed. A new venue, Raydium LaunchLab, took 12 % to 19 % of the volume of the five tokens, and the share of trades against tokens other than stablecoins or SOL (Solana's own currency) rose from 4.9 % of the volume in August to 38.5 % in September. The stablecoin prices used in this project were not visibly affected: in September 2026 the prices from the other trades deviate from them by a median of 0.04 % to 0.22 %, depending on the token and on what it was traded against.
+In September 2026 the trading pattern changed. A new venue, Raydium LaunchLab, appeared in August 2026 with only about 158,000 USD of volume (Nvidia token only) and took 12 % to 19 % of the volume of each of the five tokens in September. The share of trades against tokens other than stablecoins or SOL (Solana's own currency) rose from 4.9 % of the volume in August to 38.5 % in September. The stablecoin prices used in this project were not visibly affected: in September 2026 the prices from the other trades deviate from them by a median of 0.04 % to 0.22 %, depending on the token and on what it was traded against.
 
 ## Data and method
 
@@ -173,7 +173,7 @@ The net move from the last token price before the close to the last price before
 
 **Largely, yes.** Three measures answer this. All three compare the token with the stock over the same closed period. The token's move runs from its last price before the close to its last price within two hours before the open, and the stock's gap runs from the official close to the official open.
 
-The first measure is the correlation between the two. It is 0.88 (Apple) to 0.96 (Nvidia), where 1 would mean identical moves, and it is weaker over weekends (0.88) than over regular nights (0.95). The second is the direction: where the stock gapped by at least 0.5 %, the token had moved in the same direction in 95 % to 99 % of the cases. The third is the forecast error, the median distance between the last token price before the open and the real opening price. It is 0.18 % to 0.30 %. As a naive benchmark, yesterday's closing price misses the opening price by 0.32 % to 0.85 %.
+The first measure is the correlation between the two. It is 0.88 (Apple) to 0.96 (Nvidia), where 1 would mean a perfect linear relationship and 0 none, and it is weaker over weekends (0.88) than over regular nights (0.95). The second is the direction: where the stock gapped by at least 0.5 %, the token had moved in the same direction in 95 % to 99 % of the cases. The third is the forecast error, the median distance between the last token price before the open and the real opening price. It is 0.18 % to 0.30 %. As a naive benchmark, yesterday's closing price misses the opening price by 0.32 % to 0.85 %.
 
 Each dot in the first chart is one closed period. The closer the dots lie to the dashed line, the better the token's move matched the stock's gap.
 
