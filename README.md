@@ -99,7 +99,7 @@ xStocks is not the only issuer of tokenized stocks on Solana; Ondo Global Market
 
 ## Why these five tokens
 
-The tokens follow from two rules applied to every token whose Solana mint address starts with `Xs`, the prefix used by xStocks (monthly overview from Dune, 153 symbols, including a few unrelated tokens with the same prefix):
+The tokens follow from two rules applied to every token whose Solana mint address starts with `Xs`, the prefix used by xStocks (monthly overview from Dune, 145 symbols with trades from July 2025 on, including a few unrelated tokens with the same prefix):
 
 1. **Continuous trading:** at least 5,000 trades in every month from July 2025 to September 2026.
 2. **Well-known single company without a crypto link**, so that readers outside the crypto scene can follow the comparison.
@@ -131,7 +131,7 @@ Two candidates were considered first and dropped because they were hardly traded
 ## Market context
 
 - **Solana dominates on-chain trading of tokenized stocks.** In June 2026 Solana accounted for about 94 % to 96 % of the tokenized stock trading volume across blockchains, according to SolanaFloor [7]. This is why the project uses Solana and not Ethereum.
-- **The market grew strongly during the analysis window.** Monthly decentralized volume of all tokens in the overview query rose from 114 million USD in July 2025 to 2,290 million USD in June 2026 and 2,105 million USD in September 2026 (own Dune data).
+- **The market grew strongly during the analysis window.** Monthly decentralized volume of all tokens in the overview query rose from 114 million USD in July 2025 to 518 million USD in August 2026. Two months stand far above this trend: June 2026 with 2,290 million USD and September 2026 with 2,105 million USD (own Dune data).
 - **Raydium is the main venue, but not for every token to the same degree.** Share of decentralized volume from July 2025 to August 2026 (own Dune data):
 
 | Venue | TSLAx | NVDAx | GOOGLx | AAPLx | AMZNx |
@@ -140,9 +140,9 @@ Two candidates were considered first and dropped because they were hardly traded
 | Byreal | 11.1 % | 9.9 % | 30.6 % | 20.5 % | 15.8 % |
 | JupiterZ | 6.2 % | 6.1 % | 22.1 % | 14.9 % | 14.8 % |
 | Orca (Whirlpool) | 16.3 % | 8.8 % | 3.3 % | 1.7 % | 0.6 % |
-| Other | 7.1 % | 2.3 % | 2.9 % | 7.3 % | 1.1 % |
+| Other | 7.2 % | 2.3 % | 2.9 % | 7.3 % | 1.2 % |
 
-- **September 2026 changed the trading pattern.** A new venue, Raydium LaunchLab, took 12 % to 19 % of the volume of the five tokens, and the share of trades against tokens other than stablecoins or SOL rose from 4.9 % of volume in August to 38.5 % in September. The stablecoin prices used here were not visibly affected: prices from the other trades deviate from them by a median of 0.1 % to 0.2 %.
+- **September 2026 changed the trading pattern.** A new venue, Raydium LaunchLab, took 12 % to 19 % of the volume of the five tokens, and the share of trades against tokens other than stablecoins or SOL rose from 4.9 % of volume in August to 38.5 % in September. The stablecoin prices used here were not visibly affected: in September 2026 the prices from the other trades deviate from them by a median of 0.04 % to 0.22 %, depending on the token and on what it was traded against.
 
 ## Data
 
@@ -187,7 +187,7 @@ Pool fees are missing. The column `fee_tier` of `dex_solana.trades` is filled fo
 ## Method in short
 
 - **Token price:** 30-minute volume-weighted average price of trades against USDC or USDT. A price that deviates by more than 5 % from the centred 24-hour rolling median is flagged as an outlier and not used (31 half-hours in total).
-- **Analysis window:** starts on 8 July 2025. The Amazon token traded at unusable prices from 2 to 7 July 2025 (between about 180 and 3,300 USD on a few dollars of volume, against a real share price of about 225 USD).
+- **Analysis window:** starts on 8 July 2025. The Amazon token traded at unusable prices from 2 to 7 July 2025 (between about 180 and 3,300 USD on thin volume, a median of about 265 USD per half-hour, against a real share price of about 225 USD).
 - **Stock price:** the open is the open of the 9:30 bar, the close is the close of the last regular bar. On the two shortened trading days in the window the close is approximated.
 - **Closed period:** the time between one close and the next open. The window contains 243 regular nights, 56 weekends and 11 breaks with a public holiday.
 - **Time zones:** all timestamps are stored in UTC and converted to New York time for the market calendar, so daylight-saving changes are handled automatically.

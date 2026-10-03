@@ -101,7 +101,7 @@ xStocks ist nicht der einzige Emittent tokenisierter Aktien auf Solana; auch Ond
 
 ## Warum diese fünf Token
 
-Die Token ergeben sich aus zwei Regeln, angewendet auf jeden Token, dessen Mint-Adresse auf Solana mit `Xs` beginnt, dem Präfix von xStocks (Monatsübersicht aus Dune, 153 Symbole, darunter einige fremde Token mit demselben Präfix):
+Die Token ergeben sich aus zwei Regeln, angewendet auf jeden Token, dessen Mint-Adresse auf Solana mit `Xs` beginnt, dem Präfix von xStocks (Monatsübersicht aus Dune, 145 Symbole mit Trades ab Juli 2025, darunter einige fremde Token mit demselben Präfix):
 
 1. **Durchgehender Handel:** mindestens 5.000 Trades in jedem Monat von Juli 2025 bis September 2026.
 2. **Bekannte Einzelfirma ohne Krypto-Bezug**, damit auch Leser außerhalb der Krypto-Szene dem Vergleich folgen können.
@@ -133,7 +133,7 @@ Zwei Kandidaten wurden zuerst erwogen und verworfen, weil sie 2025 kaum gehandel
 ## Marktumfeld
 
 - **Solana dominiert den On-Chain-Handel mit tokenisierten Aktien.** Im Juni 2026 entfielen laut SolanaFloor rund 94 % bis 96 % des Handelsvolumens tokenisierter Aktien über alle Blockchains auf Solana [7]. Deshalb nutzt das Projekt Solana und nicht Ethereum.
-- **Der Markt ist im Analysezeitraum stark gewachsen.** Das monatliche dezentrale Volumen aller Token in der Übersichtsabfrage stieg von 114 Mio. USD im Juli 2025 auf 2.290 Mio. USD im Juni 2026 und lag im September 2026 bei 2.105 Mio. USD (eigene Dune-Daten).
+- **Der Markt ist im Analysezeitraum stark gewachsen.** Das monatliche dezentrale Volumen aller Token in der Übersichtsabfrage stieg von 114 Mio. USD im Juli 2025 auf 518 Mio. USD im August 2026. Zwei Monate liegen weit über diesem Trend: Juni 2026 mit 2.290 Mio. USD und September 2026 mit 2.105 Mio. USD (eigene Dune-Daten).
 - **Raydium ist der wichtigste Handelsort, aber nicht für jeden Token gleich stark.** Anteil am dezentralen Volumen von Juli 2025 bis August 2026 (eigene Dune-Daten):
 
 | Handelsort | TSLAx | NVDAx | GOOGLx | AAPLx | AMZNx |
@@ -142,9 +142,9 @@ Zwei Kandidaten wurden zuerst erwogen und verworfen, weil sie 2025 kaum gehandel
 | Byreal | 11,1 % | 9,9 % | 30,6 % | 20,5 % | 15,8 % |
 | JupiterZ | 6,2 % | 6,1 % | 22,1 % | 14,9 % | 14,8 % |
 | Orca (Whirlpool) | 16,3 % | 8,8 % | 3,3 % | 1,7 % | 0,6 % |
-| Andere | 7,1 % | 2,3 % | 2,9 % | 7,3 % | 1,1 % |
+| Andere | 7,2 % | 2,3 % | 2,9 % | 7,3 % | 1,2 % |
 
-- **Im September 2026 änderte sich das Handelsmuster.** Ein neuer Handelsort, Raydium LaunchLab, kam auf 12 % bis 19 % des Volumens der fünf Token, und der Anteil der Trades gegen andere Token als Stablecoins oder SOL stieg von 4,9 % des Volumens im August auf 38,5 % im September. Die hier verwendeten Stablecoin-Preise waren davon nicht sichtbar betroffen: Die Preise aus den übrigen Trades weichen im Median um 0,1 % bis 0,2 % davon ab.
+- **Im September 2026 änderte sich das Handelsmuster.** Ein neuer Handelsort, Raydium LaunchLab, kam auf 12 % bis 19 % des Volumens der fünf Token, und der Anteil der Trades gegen andere Token als Stablecoins oder SOL stieg von 4,9 % des Volumens im August auf 38,5 % im September. Die hier verwendeten Stablecoin-Preise waren davon nicht sichtbar betroffen: Im September 2026 weichen die Preise aus den übrigen Trades im Median um 0,04 % bis 0,22 % davon ab, je nach Token und Gegenwährung.
 
 ## Daten
 
@@ -189,7 +189,7 @@ Die Pool-Gebühren fehlen. Die Spalte `fee_tier` von `dex_solana.trades` ist nur
 ## Methode in Kürze
 
 - **Token-Preis:** volumengewichteter 30-Minuten-Durchschnittspreis der Trades gegen USDC oder USDT. Ein Preis, der um mehr als 5 % vom zentrierten gleitenden 24-Stunden-Median abweicht, wird als Ausreißer markiert und nicht verwendet (insgesamt 31 halbe Stunden).
-- **Analysezeitraum:** beginnt am 8. Juli 2025. Der Amazon-Token wurde vom 2. bis 7. Juli 2025 zu unbrauchbaren Preisen gehandelt (zwischen rund 180 und 3.300 USD bei wenigen Dollar Volumen, bei einem echten Aktienkurs von rund 225 USD).
+- **Analysezeitraum:** beginnt am 8. Juli 2025. Der Amazon-Token wurde vom 2. bis 7. Juli 2025 zu unbrauchbaren Preisen gehandelt (zwischen rund 180 und 3.300 USD bei dünnem Volumen, im Median rund 265 USD je halbe Stunde, bei einem echten Aktienkurs von rund 225 USD).
 - **Aktienkurs:** Die Eröffnung ist der Eröffnungskurs der Kerze um 9:30 Uhr, der Schluss ist der Schlusskurs der letzten regulären Kerze. An den zwei verkürzten Handelstagen im Zeitraum ist der Schluss angenähert.
 - **Börsenpause:** die Zeit zwischen einem Schluss und der nächsten Eröffnung. Der Zeitraum enthält 243 normale Nächte, 56 Wochenenden und 11 Pausen mit Feiertag.
 - **Zeitzonen:** Alle Zeitstempel sind in UTC gespeichert und werden für den Börsenkalender in New Yorker Zeit umgerechnet. So ist die Umstellung zwischen Sommer- und Winterzeit automatisch berücksichtigt.
